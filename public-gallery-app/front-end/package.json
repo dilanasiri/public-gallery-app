@@ -1,0 +1,19 @@
+{
+  "name": "front-end",
+  "version": "1.0.0",
+  "source": [
+    "src/index.html"
+  ],
+  "scripts": {
+    "start": "parcel",
+    "build": "rm -rf dist && parcel build"
+  },
+  "dependencies": {
+    "@parcel/transformer-sass": "^2.9.3",
+    "animate.css": "^4.1.1",
+    "bootstrap": "^5.3.0",
+    "file-server": "^2.2.1",
+    "jquery": "^3.7.0",
+    "parcel": "^2.9.3"
+  }
+}
