@@ -15,3 +15,93 @@ header h1 svg {
   top: 0;
   left: 0;
 }
+#drop-zone {
+  width: 80%;
+  height: 50%;
+  border: 5px dashed white;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+#drop-zone:hover {
+  border-color: rgba(30, 144, 255, 0.75);
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  background-color: rgba(30, 144, 255, 0.15);
+
+}
+
+main {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding: 10px;
+  justify-content: center;
+}
+
+main > .image {
+  $size: 180px;
+  width: 300px;
+  height: $size;
+  border: 1px dotted lightgray;
+  border-radius: 10px;
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition-property: transform;
+  transition-duration: 500ms;
+  position: relative;
+  overflow: hidden;
+
+  #img-overlay {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: absolute;
+    top: 100%;
+    transition-property: top;
+    transition-duration: 250ms;
+  }
+
+  #download {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -100%;
+    transition-property: top;
+    transition-duration: 250ms;
+    transition-delay: 50ms;
+    z-index: 99999;
+
+    svg {
+      width: 32px;
+      height: 32px;
+      font-weight: bold;
+      color: black;
+      background-color: rgba(255, 255, 255, 0.48);
+      padding: 5px;
+      border-radius: 3px;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    z-index: 999999999;
+
+    #img-overlay {
+      top: 0;
+    }
+
+    #download {
+      top: 0;
+    }
+  }
+}
