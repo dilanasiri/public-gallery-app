@@ -2,6 +2,7 @@ package lk.ijse.dep10.gallery;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.Filter;
 import javax.servlet.MultipartConfigElement;
 import javax.servlet.ServletRegistration;
 
@@ -27,4 +28,10 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
         MultipartConfigElement multipartConfigElement = new MultipartConfigElement(tempDir);
         registration.setMultipartConfig(multipartConfigElement);
     }
+
+    @Override
+    protected Filter[] getServletFilters() {
+        return new Filter[]{new CorsFilter()};
+    }
+
 }

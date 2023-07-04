@@ -32,7 +32,7 @@ Back-End
   
   To try out the project, please follow these Git commands in your terminal:
   1. Clone the Project 
-    - 
+    - https://github.com/dilanasiri/public-gallery-app.git
   2. Get the dependencies
     - npm i
   3. Then execute the application  
