@@ -1,14 +1,14 @@
 package lk.ijse.dep10.gallery.api;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.Part;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +30,27 @@ public class ImageController {
             imageFileList.add(url);
         }
         return imageFileList;
+    }
+
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public List<String> saveImages(@RequestPart("images") List<Part> imageFiles , UriComponentsBuilder uriComponentsBuilder) {
+        List<String> imageUrlList = new ArrayList<>();
+        if (imageFiles != null) {
+            String imageDirPath = servletContext.getRealPath("/images");
+            for (Part imageFile:imageFiles) {
+                String imageFilePath = new File(imageDirPath, imageFile.getSubmittedFileName()).getAbsolutePath();
+                try{
+                    UriComponentsBuilder cloneBuilder = uriComponentsBuilder.cloneBuilder();
+                    String imageUrl = cloneBuilder.pathSegment("images", imageFile.getSubmittedFileName()).toUriString();
+                    imageFile.write(imageFilePath);
+                    imageUrlList.add(imageUrl);
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        return imageUrlList;
     }
 
 }
